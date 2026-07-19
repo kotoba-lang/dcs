@@ -1,7 +1,16 @@
 {:paths ["src"]
- ;; Zero third-party runtime deps — every core namespace is portable .cljc
- ;; (JVM, ClojureScript, SCI). dcs.runner is host-side JVM only (.clj).
- :deps {}
+ ;; The domain core (model/validate/pid/alarm/execute/ports) is zero
+ ;; third-party-runtime-deps portable .cljc (JVM, ClojureScript, SCI).
+ ;; dcs.runner and the protocol-simulation layer (dcs.gpio/dcs.modbus/
+ ;; dcs.opcua/dcs.plc) are host-side JVM only (.clj) and never loaded by a
+ ;; consumer who only requires the domain core. dcs.modbus's ONE real
+ ;; dependency is com.digitalpetri.modbus/modbus-tcp — a real, independently
+ ;; authored, actively maintained Modbus-for-Java library (same author as
+ ;; Eclipse Milo) implementing genuine MBAP wire framing; dcs.modbus supplies
+ ;; only the register<->tag mapping on top of it, not a reimplementation of
+ ;; the wire protocol. See README "Protocol-simulation layer" section.
+ :deps {com.digitalpetri.modbus/modbus-tcp {:mvn/version "2.1.0"}
+        org.eclipse.milo/sdk-server {:mvn/version "0.6.16"}}
  :aliases
  {:test {:extra-paths ["test"]
          :extra-deps {io.github.cognitect-labs/test-runner
@@ -10,4 +19,15 @@
          :exec-fn cognitect.test-runner.api/test}
   :lint {:replace-deps {clj-kondo/clj-kondo {:mvn/version "2024.11.14"}}
          :main-opts ["-m" "clj-kondo.main" "--lint" "src" "test"
-                     "--fail-level" "error"]}}}
+                     "--fail-level" "error"]}
+  ;; Isolated real-client wire-protocol proof for dcs.opcua -- deliberately
+  ;; OUTSIDE :test. org.eclipse.milo/sdk-client (Milo 0.6.16-era) needs
+  ;; com.digitalpetri.netty:netty-channel-fsm 0.9; com.digitalpetri.modbus
+  ;; needs 1.0.0 (base :deps, required by dcs.modbus's own :test suite).
+  ;; Both on one classpath -> a real AbstractMethodError at OPC-UA connect
+  ;; time. :replace-deps drops the conflicting base deps for this alias
+  ;; only. See dcs.opcua's docstring / test/dcs/opcua_client_verify.clj.
+  :opcua-verify {:extra-paths ["test"]
+                 :replace-deps {org.eclipse.milo/sdk-server {:mvn/version "0.6.16"}
+                                org.eclipse.milo/sdk-client {:mvn/version "0.6.16"}}
+                 :main-opts ["-m" "dcs.opcua-client-verify"]}}}
