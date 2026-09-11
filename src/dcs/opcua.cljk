@@ -76,7 +76,7 @@
   and verified discovery path; root-down Browse discoverability of our
   custom nodes is a known, documented gap, not a silent one.**
 
-  ## Verification (why it's outside `clojure -M:test`)
+  ## Verification (why it's outside `kbb -M:test`)
 
   A real, independent Eclipse Milo `OpcUaClient` (module `sdk-client`) DOES
   connect to this server and read/write successfully — verified by hand in

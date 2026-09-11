@@ -11,7 +11,7 @@
   verified AbstractMethodError) with `com.digitalpetri.modbus:modbus-tcp`'s
   `netty-channel-fsm:1.0.0` requirement on the SAME classpath dcs.modbus's
   own test needs — so the two real-client proofs cannot run in one JVM
-  process / one `clojure -M:test` invocation."
+  process / one `kbb -M:test` invocation."
   (:require [clojure.test :refer [deftest is testing]]
             [dcs.ports :as ports]
             [dcs.opcua :as opcua])

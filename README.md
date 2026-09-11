@@ -307,7 +307,7 @@ write to read-only node -> real Bad_NotWritable  -> PASS
 rejected write left CoV untouched                -> PASS
 ```
 
-This verification is **not** part of `clojure -M:test` — a real, reproduced
+This verification is **not** part of `kbb -M:test` — a real, reproduced
 conflict: Milo 0.6.16's client transport (`sdk-client`) needs
 `com.digitalpetri.netty:netty-channel-fsm:0.9`; `com.digitalpetri.modbus:
 modbus-tcp` (dcs.modbus's dependency, in `:test`'s classpath via the base
@@ -317,7 +317,7 @@ between two otherwise-unrelated digitalpetri-authored libraries, not a
 design choice. Reproduce the real-client proof in an isolated classpath:
 
 ```sh
-clojure -M:opcua-verify -m dcs.opcua-client-verify
+kbb -M:opcua-verify -m dcs.opcua-client-verify
 ```
 
 `test/dcs/opcua_test.cljk` (part of the main `:test` suite) covers the
@@ -365,13 +365,13 @@ the dependency, not a deployment.
 ## Test
 
 ```sh
-clojure -M:test    # everything, including dcs.gpio/dcs.modbus/dcs.opcua/dcs.plc
-clojure -M:lint
+kbb -M:test    # everything, including dcs.gpio/dcs.modbus/dcs.opcua/dcs.plc
+kbb -M:lint
 ```
 
 For the isolated real-OPC-UA-client wire proof (kept out of `:test` for a
 real dependency-conflict reason — see "Protocol-simulation layer" above):
 
 ```sh
-clojure -M:opcua-verify -m dcs.opcua-client-verify
+kbb -M:opcua-verify -m dcs.opcua-client-verify
 ```

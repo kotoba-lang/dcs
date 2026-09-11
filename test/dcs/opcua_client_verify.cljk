@@ -12,7 +12,7 @@
 
   Run with:
 
-    clojure -M:opcua-verify -m dcs.opcua-client-verify
+    kbb -M:opcua-verify -m dcs.opcua-client-verify
 
   This uses `org.eclipse.milo:sdk-client` — a REAL, independent Eclipse
   Milo `OpcUaClient` — to connect to a `dcs.opcua` server over a real
