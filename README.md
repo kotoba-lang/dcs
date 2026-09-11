@@ -226,7 +226,7 @@ answer reads but reject writes with a real Modbus ILLEGAL_FUNCTION
 exception; unmapped addresses answer with a real ILLEGAL_DATA_ADDRESS
 exception — not silent success either way.
 
-Status: **fully real wire protocol.** `test/dcs/modbus_test.clj` connects
+Status: **fully real wire protocol.** `test/dcs/modbus_test.cljk` connects
 with `com.digitalpetri.modbus`'s OWN `ModbusTcpClient` — a real,
 independent client, not an internal function call — over a real loopback
 TCP socket, and proves FC03/04/06/16 round-trip, atomic rejection of a
@@ -320,7 +320,7 @@ design choice. Reproduce the real-client proof in an isolated classpath:
 clojure -M:opcua-verify -m dcs.opcua-client-verify
 ```
 
-`test/dcs/opcua_test.clj` (part of the main `:test` suite) covers the
+`test/dcs/opcua_test.cljk` (part of the main `:test` suite) covers the
 exact same request-dispatch code path in-process instead — real
 `AttributeServices$ReadContext`/`WriteContext` objects, real
 `AddressSpaceFragment`, real `AttributeFilter` chain, only the actual TCP
@@ -347,7 +347,7 @@ static data server: `dcs.modbus`'s server and `dcs.plc`'s scan service
 share the SAME live `IFieldIO`/tag registry, so a real Modbus client
 polling the server while the scan cycle runs sees values actually
 changing, because the PID/alarm logic is actually executing on its own
-schedule. `test/dcs/plc_test.clj`'s
+schedule. `test/dcs/plc_test.cljk`'s
 `live-scan-cycle-is-observable-through-a-real-modbus-client` test is the
 concrete proof: it starts both, polls `OUT1` twice through a real Modbus
 client with a real sleep in between, and asserts the two reads differ.

@@ -18,7 +18,7 @@
   Milo `OpcUaClient` — to connect to a `dcs.opcua` server over a real
   loopback TCP socket with real UA-TCP binary framing, and read/write
   registers, printing PASS/FAIL per assertion and exiting non-zero on any
-  failure. `test/dcs/opcua_test.clj` (part of the main :test alias) covers
+  failure. `test/dcs/opcua_test.cljk` (part of the main :test alias) covers
   the same request-dispatch code path in-process, real objects, minus the
   actual TCP bytes; this file is what proves the TCP bytes."
   (:require [dcs.ports :as ports]

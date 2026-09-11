@@ -26,7 +26,7 @@
   ;; needs 1.0.0 (base :deps, required by dcs.modbus's own :test suite).
   ;; Both on one classpath -> a real AbstractMethodError at OPC-UA connect
   ;; time. :replace-deps drops the conflicting base deps for this alias
-  ;; only. See dcs.opcua's docstring / test/dcs/opcua_client_verify.clj.
+  ;; only. See dcs.opcua's docstring / test/dcs/opcua_client_verify.cljk.
   :opcua-verify {:extra-paths ["test"]
                  :replace-deps {org.eclipse.milo/sdk-server {:mvn/version "0.6.16"}
                                 org.eclipse.milo/sdk-client {:mvn/version "0.6.16"}}
