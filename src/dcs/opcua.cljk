@@ -112,7 +112,7 @@
   Variants carry native Double/Boolean values, so the domain value passes
   through unchanged (`:dcs/type` is `:double` or `:boolean`, selecting the
   wire DataType and the Variant coercion)."
-  (:require [dcs.ports :as ports])
+  (:require [kotoba.io :as kio] [dcs.ports :as ports])
   (:import
    (org.eclipse.milo.opcua.sdk.server OpcUaServer UaNodeManager)
    (org.eclipse.milo.opcua.sdk.server.api AddressSpaceFragment SimpleAddressSpaceFilter)
@@ -132,7 +132,6 @@
    (org.eclipse.milo.opcua.stack.core.types.structured BuildInfo UserTokenPolicy)
    (org.eclipse.milo.opcua.stack.core.types.builtin
     NodeId QualifiedName LocalizedText DataValue Variant DateTime StatusCode)
-   (java.nio.file Files)
    (java.util.concurrent Executors)
    (java.util.function Function BiConsumer Predicate)))
 
@@ -272,7 +271,7 @@
 ;; --- server lifecycle ---
 
 (defn- build-config [{:keys [host port app-uri]}]
-  (let [trust-dir (.toFile (Files/createTempDirectory "dcs-opcua-pki" (make-array java.nio.file.attribute.FileAttribute 0)))
+  (let [trust-dir (kio/temp-dir "dcs-opcua-pki")
         trust-list-manager (DefaultTrustListManager. trust-dir)
         endpoint (-> (EndpointConfiguration$Builder.)
                      (.setBindAddress host)
