@@ -1,5 +1,5 @@
 (ns dcs.alarm-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [dcs.alarm :as alarm]))
 
 (def hi-alarm {:dcs/tag "PV1" :dcs/type :hi :dcs/setpoint 100.0 :dcs/deadband 5.0})
