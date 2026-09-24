@@ -9,7 +9,11 @@
  ;; Eclipse Milo) implementing genuine MBAP wire framing; dcs.modbus supplies
  ;; only the register<->tag mapping on top of it, not a reimplementation of
  ;; the wire protocol. See README "Protocol-simulation layer" section.
- :deps {com.digitalpetri.modbus/modbus-tcp {:mvn/version "2.1.0"}
+ :deps {
+        ;; kotoba.test (clojure.test-compatible surface), not clojure.test --
+        ;; scripts/migrate-clojure-test-to-kotoba-test.cljk. Explicit floor.
+        io.github.kotoba-lang/test {:git/url "https://github.com/kotoba-lang/test.git"
+                                    :git/sha "2ab4885f99fd25552d380d0f6b0b54c5a72eb7ae"}com.digitalpetri.modbus/modbus-tcp {:mvn/version "2.1.0"}
         org.eclipse.milo/sdk-server {:mvn/version "0.6.16"}}
  :aliases
  {:test {:extra-paths ["test"]

@@ -6,7 +6,7 @@
   genuine external-observability proof: if this test only called
   dcs.modbus's Clojure functions directly, it would prove nothing about
   wire-protocol compatibility."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [dcs.ports :as ports]
             [dcs.modbus :as modbus])
   (:import

@@ -1,5 +1,5 @@
 (ns dcs.plc-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [dcs.model :as m]
             [dcs.ports :as ports]
             [dcs.execute :as execute]

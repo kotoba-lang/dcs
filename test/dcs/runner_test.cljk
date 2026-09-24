@@ -1,5 +1,5 @@
 (ns dcs.runner-test
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [dcs.model :as m]
             [dcs.runner :as runner]))
 

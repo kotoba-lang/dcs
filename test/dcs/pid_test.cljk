@@ -1,5 +1,5 @@
 (ns dcs.pid-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [dcs.pid :as pid]))
 
 (defn- abs* [v] (if (neg? v) (- v) v))
